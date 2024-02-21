@@ -1,0 +1,141 @@
+<mxfile host="app.diagrams.net" modified="2024-02-20T21:22:50.113Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36" etag="AVGMUPCJeXfrYqnZ_0Xy" version="23.1.2" type="github">
+  <diagram name="‫עמוד-1‬" id="v54Fw246goHUVuYJD4Bt">
+    <mxGraphModel dx="2392" dy="837" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bBNi_ssrOolv1XeDibm9-1" value="abstract Vehicle" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="314" y="30" width="200" height="100" as="geometry">
+            <mxRectangle x="314" y="30" width="130" height="30" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-2" value="- m_Model : string&lt;br&gt;- m_LicenseNumber : string&lt;br&gt;- m_EnergyPrecent : float&lt;br&gt;- m_WheelList[] : Wheel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-1">
+          <mxGeometry y="26" width="200" height="74" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-1">
+          <mxGeometry y="100" width="200" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.005;entryY=0.662;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="bBNi_ssrOolv1XeDibm9-1" source="bBNi_ssrOolv1XeDibm9-2" target="bBNi_ssrOolv1XeDibm9-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-5" value="struct Wheel" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="760" y="50" width="200" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-6" value="- m_ManufacturerName : string&lt;br&gt;- m_AirPressure : float&lt;br&gt;- m_MaxAirPressure : float" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-5">
+          <mxGeometry y="26" width="200" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-7" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-5">
+          <mxGeometry y="80" width="200" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-8" value="+ BlowWheel(float i_AirAmount) : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-5">
+          <mxGeometry y="88" width="200" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-9" value="Motorcycle" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="390" width="160" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-10" value="- m_LicenseType: enum&lt;br&gt;- m_EngineCapacity : int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-9">
+          <mxGeometry y="26" width="160" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-11" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-9">
+          <mxGeometry y="70" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-16" value="Car" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="270" y="390" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-17" value="- Color : enum&lt;br&gt;- DoorsAmount : enum" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-16">
+          <mxGeometry y="26" width="160" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-18" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-16">
+          <mxGeometry y="70" width="160" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="bBNi_ssrOolv1XeDibm9-25" target="bBNi_ssrOolv1XeDibm9-34">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-25" value="Truck" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-226" y="390" width="270" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-26" value="- TransportHazardousMaterial : bool&lt;br&gt;- CargoCapacity : float" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-25">
+          <mxGeometry y="26" width="270" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-27" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-25">
+          <mxGeometry y="70" width="270" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-28" value="+ method(type): type" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-25">
+          <mxGeometry y="78" width="270" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-52" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="bBNi_ssrOolv1XeDibm9-29" target="bBNi_ssrOolv1XeDibm9-39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-29" value="ElectricMotorcycle" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="392" width="160" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-30" value="- m_LicenseType: enum&lt;br style=&quot;border-color: var(--border-color);&quot;&gt;- m_EngineCapacity : int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-29">
+          <mxGeometry y="26" width="160" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-31" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-29">
+          <mxGeometry y="70" width="160" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="bBNi_ssrOolv1XeDibm9-33" target="bBNi_ssrOolv1XeDibm9-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-33" value="GasVehicle" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="44" y="160" width="290" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-34" value="- m_FuelType : enum&lt;br&gt;- m_FuelAmount : float&lt;br&gt;- m_MaxFuelAmount" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-33">
+          <mxGeometry y="26" width="290" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-35" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-33">
+          <mxGeometry y="80" width="290" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-36" value="+ Refueling(float i_Liters, enum i_FuelType) : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-33">
+          <mxGeometry y="88" width="290" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="bBNi_ssrOolv1XeDibm9-38" target="bBNi_ssrOolv1XeDibm9-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-38" value="ElectricVehicle" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="186" width="210" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-39" value="- m_AccumulatortTimeLeft : float&lt;br&gt;- m_MaxAccumulatorTime : float" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-38">
+          <mxGeometry y="26" width="210" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-40" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-38">
+          <mxGeometry y="70" width="210" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-41" value="+ Charge(float i_Hours) : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-38">
+          <mxGeometry y="78" width="210" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-46" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.402;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="bBNi_ssrOolv1XeDibm9-9" target="bBNi_ssrOolv1XeDibm9-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-47" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.824;entryY=1.024;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="bBNi_ssrOolv1XeDibm9-16" target="bBNi_ssrOolv1XeDibm9-36">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="bBNi_ssrOolv1XeDibm9-48" target="bBNi_ssrOolv1XeDibm9-39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-48" value="ElectricCar" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="690" y="392" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-49" value="- Color : enum&lt;br&gt;- DoorsAmount : enum" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-48">
+          <mxGeometry y="26" width="160" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-50" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-48">
+          <mxGeometry y="70" width="160" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-54" value="Garage" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="230" y="570" width="350" height="260" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-55" value="- m_OwnerName : string&lt;br&gt;- m_OwnerPhone : string&lt;br&gt;- m_VehiclesList[] : Vehicle&lt;br&gt;- m_VehicleStatus : enum" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-54">
+          <mxGeometry y="26" width="350" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-56" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=inherit;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-54">
+          <mxGeometry y="90" width="350" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="bBNi_ssrOolv1XeDibm9-57" value="+ Insert(Vehicle i_Vehicle) : void&lt;br&gt;+ DisplayVehicleStatus () : Vehicle []&lt;br&gt;+ DisplayVehicleStatus (enum i_VehicleStatus) : Vehicle []&lt;br&gt;+ ChangeVehicleStatus (string i_LicenseNumber, enum i_VehicleStatus) : void&lt;br&gt;+ BlowMaxWheel (string i_LicenseNumber) : void&lt;br&gt;+ RefuelingVehicle(string&amp;nbsp;i_LicenseNumber, enum i_FuelType, float i_Liters) : void&amp;nbsp;&lt;br&gt;+ ChargeVehicle(string i_LicenseNumber, float i_Minutes) : void&lt;br&gt;+ DisplayVehicleDetails(string i_LicenseNumber) : Vehicle" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="bBNi_ssrOolv1XeDibm9-54">
+          <mxGeometry y="98" width="350" height="162" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
