@@ -35,5 +35,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="eColor.cs" />
+    <Compile Include="eDoorsAmount.cs" />
+    <Compile Include="ElectricCar.cs" />
+    <Compile Include="ElectricMotorcycle.cs" />
+    <Compile Include="ElectricVehicle.cs" />
+    <Compile Include="eLicenseType.cs" />
+    <Compile Include="eVehicleStatus.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="Garage.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="ValueOutOfRangeException.cs" />
+    <Compile Include="Vehicle.cs" />
+    <Compile Include="Wheel.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
