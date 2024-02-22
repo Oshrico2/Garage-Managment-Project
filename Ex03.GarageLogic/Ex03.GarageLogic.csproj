@@ -36,8 +36,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="car.cs" />
     <Compile Include="eColor.cs" />
     <Compile Include="eDoorsAmount.cs" />
+    <Compile Include="eFuelType.cs" />
     <Compile Include="ElectricCar.cs" />
     <Compile Include="ElectricMotorcycle.cs" />
     <Compile Include="ElectricVehicle.cs" />
@@ -45,7 +47,10 @@
     <Compile Include="eVehicleStatus.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="Garage.cs" />
+    <Compile Include="GasVehicle.cs" />
+    <Compile Include="Motorcycle.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Truck.cs" />
     <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Wheel.cs" />

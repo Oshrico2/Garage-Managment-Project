@@ -6,6 +6,5 @@
         White,
         Red,
         Yellow
-
     }
 }
