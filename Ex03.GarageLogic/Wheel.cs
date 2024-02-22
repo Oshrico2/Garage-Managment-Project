@@ -1,15 +1,21 @@
 ﻿using Ex03.GarageLogic.Exceptions;
+using System;
 namespace Ex03.GarageLogic
 {
     class Wheel
     {
         private string m_WheelManufacturerName;
         private float m_AirPressure;
-        private float m_MaxAirPressure;
+        private readonly float m_MaxAirPressure;
 
         public Wheel(float i_MaxAirPressure)
         {
             this.m_MaxAirPressure = i_MaxAirPressure;
+        }
+
+        public float MaxAirPressure
+        {
+            get { return m_MaxAirPressure; }
         }
 
         public string WheelManufacturerName
@@ -21,19 +27,17 @@ namespace Ex03.GarageLogic
         public float AirPressure
         {
             get { return m_AirPressure; }
-            set { m_AirPressure = value; }
-        }
-
-        public float MaxAirPressure
-        {
-            get { return m_MaxAirPressure; }
+            set 
+            {
+                this.BlowWheel(value);
+            }
         }
 
         public void BlowWheel(float i_AirAmount)
         {
             if(this.m_AirPressure + i_AirAmount > this.m_MaxAirPressure)
             {
-                throw new ValueOutOfRangeException(this.m_MaxAirPressure - this.m_AirPressure,m_MaxAirPressure);
+                throw new ValueOutOfRangeException(0,m_MaxAirPressure - m_AirPressure);
             }
             else
             {

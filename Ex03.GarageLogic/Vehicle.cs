@@ -5,21 +5,26 @@ namespace Ex03.GarageLogic
     abstract class Vehicle
     {
         private string m_VehicleModel;
-        private string m_LicenseNumber;
+        private readonly string m_LicenseNumber;
         private float m_EnergeyPrecentage;
         private List<Wheel> m_WheelList;
         private string m_OwnerName;
         private string m_OwnerPhone;
-        private eVehicleStatus m_VehicleStaus;
+        private eVehicleStatus m_VehicleStatus;
 
         public string VehicleModel
         {
             set { m_VehicleModel = value; }
         }
+
+        public List<Wheel> WheelList
+        {
+            get { return m_WheelList; }
+        }
+
         public string LicenseNumber
         {
             get { return m_LicenseNumber; }
-            set { m_LicenseNumber = value; }
         }
 
         public string OwnerName
@@ -36,14 +41,18 @@ namespace Ex03.GarageLogic
 
         public eVehicleStatus VehicleStatus
         {
-            get { return m_VehicleStaus; }
-            set { m_VehicleStaus = value; }
+            get { return m_VehicleStatus; }
         }
 
+        public void ChangeVehicleStatus(eVehicleStatus i_VehicleStatus)
+        {
+            this.m_VehicleStatus = i_VehicleStatus;
+        }
         
 
-        public Vehicle(int i_WheelsAmount, float i_MaxAirPressure)
+        public Vehicle(string i_LicenseNumber, int i_WheelsAmount, float i_MaxAirPressure)
         {
+            this.m_LicenseNumber = i_LicenseNumber;
             m_WheelList = new List<Wheel>(i_WheelsAmount);
 
             for (int i = 0; i < i_WheelsAmount; i++)
@@ -54,7 +63,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format("Model: {0}\nLicense Number: {1}\nEnergy Percentage: {2}\nNumber of Wheels: {3}, {4} air pressure to each\nOwner name: {5}\nOwner Phone: {6}\nStatus in Garage: {7}",
+            return string.Format("Model: {0}\nLicense Number: {1}\nEnergy Percentage: {2}\nNumber of Wheels: {3}, {4} air pressure to each\nOwner name: {5}\nOwner Phone: {6}\nStatus in Garage: {7}\n",
                                  m_VehicleModel,
                                  m_LicenseNumber,
                                  m_EnergeyPrecentage,
@@ -62,7 +71,9 @@ namespace Ex03.GarageLogic
                                  m_WheelList.Count > 0 ? m_WheelList[0].MaxAirPressure.ToString() : "N/A",
                                  m_OwnerName,
                                  m_OwnerPhone,
-                                 m_VehicleStaus);
+                                 m_VehicleStatus);
         }
+
+        
     }
 }

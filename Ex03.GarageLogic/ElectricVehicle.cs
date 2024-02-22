@@ -4,19 +4,27 @@ namespace Ex03.GarageLogic
     abstract class ElectricVehicle : Vehicle
     {
         private float m_AccumulatorTimeLeft;
-        private float m_MaxAccumulatorTime;
+        private readonly float m_MaxAccumulatorTime;
 
-        public ElectricVehicle(int i_WheelsAmount, float i_MaxAirPressure, float i_MaxAccumulatorTime)
-        : base(i_WheelsAmount, i_MaxAirPressure)
+        public ElectricVehicle(string i_LicenseNumber, int i_WheelsAmount, float i_MaxAirPressure, float i_MaxAccumulatorTime)
+        : base(i_LicenseNumber, i_WheelsAmount, i_MaxAirPressure)
         {
             this.m_MaxAccumulatorTime = i_MaxAccumulatorTime;
         }
 
-        public void Charge(float i_Hours)
+        public float AccumulatorTimeLeft
+        {
+            set
+            {
+                this.Charging(value);
+            }
+        }
+
+        public void Charging(float i_Hours)
         {
             if (this.m_AccumulatorTimeLeft + i_Hours > this.m_MaxAccumulatorTime)
             {
-                throw new ValueOutOfRangeException(this.m_MaxAccumulatorTime - this.m_AccumulatorTimeLeft, m_MaxAccumulatorTime);
+                throw new ValueOutOfRangeException(0, m_MaxAccumulatorTime - m_AccumulatorTimeLeft);
             }
             else
             {
@@ -24,6 +32,14 @@ namespace Ex03.GarageLogic
             }
         }
 
-        
+        public override string ToString()
+        {
+            string str;
+            str = string.Format("Accumulator Time Left:{0}\nMax Accumulator Time:{1}\n", m_AccumulatorTimeLeft, m_MaxAccumulatorTime);
+
+            return base.ToString() + str;
+        }
+
+
     }
 }

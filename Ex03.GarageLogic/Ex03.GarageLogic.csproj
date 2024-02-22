@@ -36,7 +36,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="car.cs" />
+    <Compile Include="Car.cs" />
     <Compile Include="eColor.cs" />
     <Compile Include="eDoorsAmount.cs" />
     <Compile Include="eFuelType.cs" />

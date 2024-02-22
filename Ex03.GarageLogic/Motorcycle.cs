@@ -4,7 +4,7 @@
     {
         private eLicenseType m_LicenseType;
         private int m_EngineCapaciy;
-        public Motorcycle() : base(2, 29, 2.8f) { }
+        public Motorcycle(string i_LicenseNumber) : base(i_LicenseNumber, 2, 29,eFuelType.Octan98, 5.8f) { }
 
         public eLicenseType LicenseType
         {
@@ -14,6 +14,14 @@
         public int EngineCapaciy
         {
             set { m_EngineCapaciy = value; }
+        }
+
+        public override string ToString()
+        {
+            string str;
+            str = string.Format("License Type:{0}\nEngine Capaciy:{1}\n", m_LicenseType, m_EngineCapaciy);
+
+            return base.ToString() + str;
         }
 
     }
