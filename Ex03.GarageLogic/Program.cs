@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Ex03.GarageLogic;
 
@@ -6,10 +7,59 @@ class Program
 {
     public static void Main()
     {
-        Garage.Insert(typeof(ElectricCar), "123122", "Osher Cohen", "0549577307");
-        Garage.Insert(typeof(ElectricCar), "12312312", "Guy Mizrahi", "054121514");
-        Garage.Insert(typeof(ElectricMotorcycle), "12322q", "Yuli Sotnikov", "0546233568");
-
+        Dictionary<string, Type> setters;
+        Console.WriteLine("Enter License Number");
+        string input = Console.ReadLine();
+        if(Garage.IsExistsInGarage(input))
+        {
+            Console.WriteLine("Car Exists in Garage in Reapir state");
+        }
+        else
+        {
+            try
+            {
+                setters = Garage.InsertType(typeof(ElectricMotorcycle));
+                DisplayOptions(setters);
+                setters = Garage.InsertType(typeof(ElectricCar));
+                DisplayOptions(setters);
+                setters = Garage.InsertType(typeof(ElectricMotorcycle));
+                DisplayOptions(setters);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
         
     }
+
+
+    public static void DisplayOptions(Dictionary<string, Type> setters)
+    {
+        string input;
+        foreach (var pair in setters)
+        {
+            if (pair.Value.IsEnum)
+            {
+                string enumOptions = GetEnumOptions(pair.Value);
+                Console.WriteLine(string.Format( "Enter Please {0}\n Options: {1}",pair.Key, enumOptions));
+            }
+            else
+            {
+                Console.WriteLine(string.Format("Enter Please {0}", pair.Key));
+            }
+            //input = Console.ReadLine();
+
+        }
+        Console.WriteLine();
+    }
+
+    public static string GetEnumOptions(Type enumType)
+    {
+        if (!enumType.IsEnum)
+            throw new ArgumentException("The specified type is not an enum.");
+
+        return string.Join(", ", Enum.GetNames(enumType));
+    }
 }
+

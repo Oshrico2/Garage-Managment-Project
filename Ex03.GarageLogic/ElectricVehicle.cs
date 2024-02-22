@@ -6,7 +6,7 @@ namespace Ex03.GarageLogic
         private float m_AccumulatorTimeLeft;
         private float m_MaxAccumulatorTime;
 
-        public ElectricVehicle(int i_WheelsAmount,float i_MaxAirPressure, float i_MaxAccumulatorTime)
+        public ElectricVehicle(int i_WheelsAmount, float i_MaxAirPressure, float i_MaxAccumulatorTime)
         : base(i_WheelsAmount, i_MaxAirPressure)
         {
             this.m_MaxAccumulatorTime = i_MaxAccumulatorTime;

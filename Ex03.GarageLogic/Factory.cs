@@ -28,7 +28,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("Unsupported type!");
+                throw new FormatException("Unsupported type!");
             }
             return obj as Vehicle;
         }

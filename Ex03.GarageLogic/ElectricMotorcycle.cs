@@ -6,6 +6,16 @@
         private int m_EngineCapaciy;
 
         public ElectricMotorcycle() : base(2, 29, 2.8f) { }
+
+        public eLicenseType LicenseType
+        {
+            set { m_LicenseType = value; }
+        }
+
+        public int EngineCapaciy
+        {
+            set { m_EngineCapaciy = value; }
+        }
       
 
     }

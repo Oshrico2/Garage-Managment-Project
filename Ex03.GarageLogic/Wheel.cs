@@ -3,7 +3,7 @@ namespace Ex03.GarageLogic
 {
     class Wheel
     {
-        private string m_ManufacturerName;
+        private string m_WheelManufacturerName;
         private float m_AirPressure;
         private float m_MaxAirPressure;
 
@@ -12,10 +12,10 @@ namespace Ex03.GarageLogic
             this.m_MaxAirPressure = i_MaxAirPressure;
         }
 
-        public string ManufacturerName
+        public string WheelManufacturerName
         {
-            get { return m_ManufacturerName; }
-            set { m_ManufacturerName = value; } 
+            get { return m_WheelManufacturerName; }
+            set { m_WheelManufacturerName = value; } 
         }
 
         public float AirPressure
@@ -27,7 +27,6 @@ namespace Ex03.GarageLogic
         public float MaxAirPressure
         {
             get { return m_MaxAirPressure; }
-            set { m_MaxAirPressure = value; }
         }
 
         public void BlowWheel(float i_AirAmount)

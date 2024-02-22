@@ -4,7 +4,7 @@ namespace Ex03.GarageLogic
 {
     abstract class Vehicle
     {
-        private string m_Model;
+        private string m_VehicleModel;
         private string m_LicenseNumber;
         private float m_EnergeyPrecentage;
         private List<Wheel> m_WheelList;
@@ -12,6 +12,10 @@ namespace Ex03.GarageLogic
         private string m_OwnerPhone;
         private eVehicleStatus m_VehicleStaus;
 
+        public string VehicleModel
+        {
+            set { m_VehicleModel = value; }
+        }
         public string LicenseNumber
         {
             get { return m_LicenseNumber; }
@@ -30,11 +34,13 @@ namespace Ex03.GarageLogic
             set { m_OwnerPhone = value; }
         }
 
-        public eVehicleStatus VehicleStaus
+        public eVehicleStatus VehicleStatus
         {
             get { return m_VehicleStaus; }
             set { m_VehicleStaus = value; }
         }
+
+        
 
         public Vehicle(int i_WheelsAmount, float i_MaxAirPressure)
         {
@@ -49,7 +55,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             return string.Format("Model: {0}\nLicense Number: {1}\nEnergy Percentage: {2}\nNumber of Wheels: {3}, {4} air pressure to each\nOwner name: {5}\nOwner Phone: {6}\nStatus in Garage: {7}",
-                                 m_Model,
+                                 m_VehicleModel,
                                  m_LicenseNumber,
                                  m_EnergeyPrecentage,
                                  m_WheelList.Count,

@@ -9,5 +9,15 @@
         {
 
         }
+
+        public eColor Color
+        {
+            set { m_Color = value; }
+        }
+
+        public eDoorsAmount DoorsAmount
+        {
+            set { m_DoorsAmount = value; }
+        }
     }
 }
