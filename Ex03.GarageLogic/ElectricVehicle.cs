@@ -1,7 +1,7 @@
 ﻿using Ex03.GarageLogic.Exceptions;
 namespace Ex03.GarageLogic
 {
-    abstract class ElectricVehicle : Vehicle
+    public abstract class ElectricVehicle : Vehicle
     {
         private float m_AccumulatorTimeLeft;
         private readonly float m_MaxAccumulatorTime;

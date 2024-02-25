@@ -2,7 +2,7 @@
 using System;
 namespace Ex03.GarageLogic
 {
-    class Wheel
+    public class Wheel
     {
         private string m_WheelManufacturerName;
         private float m_AirPressure;

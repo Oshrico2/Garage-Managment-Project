@@ -34,6 +34,7 @@ namespace Ex03.GarageLogic
 
             return isExistsInGarage;
         }
+
         public static Dictionary<string, Type> InsertVehicleType(Type i_Type, string i_LicenseNumber)
         {
             Vehicle vehicle;
@@ -45,7 +46,6 @@ namespace Ex03.GarageLogic
 
             return setters;
         }
-
 
         private static void chooseAttributes(Vehicle i_Vehicle ,ref Dictionary<string, Type> setters)
         {
@@ -75,7 +75,6 @@ namespace Ex03.GarageLogic
         {
             Vehicle vehicle = findVehicleByLicenseNumber(i_LicenseNumber);
             Type vehicleType = vehicle.GetType();
-            int count = 0;
 
             if (vehicle == null)
             {

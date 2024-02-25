@@ -2,7 +2,7 @@
 using System.Linq;
 namespace Ex03.GarageLogic
 {
-    abstract class Vehicle
+    public abstract class Vehicle
     {
         private string m_VehicleModel;
         private readonly string m_LicenseNumber;

@@ -2,7 +2,7 @@
 
 namespace Ex03.GarageLogic
 {
-    class ElectricMotorcycle : ElectricVehicle
+    public class ElectricMotorcycle : ElectricVehicle
     {
         private eLicenseType m_LicenseType;
         private int m_EngineCapaciy;

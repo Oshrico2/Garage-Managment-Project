@@ -2,7 +2,7 @@
 using System;
 namespace Ex03.GarageLogic
 {
-    abstract class GasVehicle : Vehicle
+    public abstract class GasVehicle : Vehicle
     {
         private readonly eFuelType m_FuelType;
         private float m_FuelAmount;

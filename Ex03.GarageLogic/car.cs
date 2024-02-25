@@ -1,6 +1,6 @@
 ﻿namespace Ex03.GarageLogic
 {
-    class Car : GasVehicle
+    public class Car : GasVehicle
     {
         private eColor m_Color;
         private eDoorsAmount m_DoorsAmount;
