@@ -88,7 +88,7 @@ namespace Ex03.ConsoleUI
 
         private static void insertVehicleHandler()
         {
-            Dictionary<string, Type> setters;
+            Dictionary<string, Type> setters = null;
             Dictionary<string, string> userInputs;
             bool isValidInput = false;
 
@@ -105,21 +105,36 @@ namespace Ex03.ConsoleUI
                     try
                     {
                         setters = Garage.InsertVehicleType(chooseVehicleType(), input);
+                        isValidInput = true;
+                    }
+                    catch(FormatException fe)
+                    {
+                        Console.WriteLine($"An error occurred: {fe.Message} Choose Valid Type of Vehicle");
+                    }
+                }
+
+                isValidInput = false;
+
+                while (!isValidInput)
+                {
+                    try
+                    {
                         userInputs = displayAndSetAttributes(setters, input);
                         Garage.SetVehicleAttributes(userInputs, input);
                         isValidInput = true;
+                        Console.WriteLine("The Vehicle arrived at the garage successfully ");
                     }
                     catch(ValueOutOfRangeException vore)
                     {
                         Console.WriteLine(vore.Message);
                     }
+                    catch (FormatException fe)
+                    {
+                        Console.WriteLine($"An error occurred: {fe.Message}");
+                    }
                     catch (ArgumentException ae)
                     {
                         Console.WriteLine($"An error occurred: {ae.Message}");
-                    }
-                    catch (FormatException fe)
-                    {
-                        Console.WriteLine($"An error occurred: {fe.Message} Choose Valid Type of Vehicle");
                     }
                 }
                 
@@ -156,13 +171,13 @@ namespace Ex03.ConsoleUI
 
         }
 
-        private static Dictionary<string,string> displayAndSetAttributes(Dictionary<string, Type> setters, string i_LicenseNumber)
+        private static Dictionary<string, string> displayAndSetAttributes(Dictionary<string, Type> setters, string i_LicenseNumber)
         {
             string input;
             Dictionary<string, string> userInputs = new Dictionary<string, string>();
 
             foreach (var pair in setters)
-            {
+            { 
                 if (pair.Value.IsEnum)
                 {
                     string enumOptions = GetEnumOptions(pair.Value);
@@ -174,9 +189,17 @@ namespace Ex03.ConsoleUI
                 }
                 input = Console.ReadLine();
                 userInputs[pair.Key] = input;
+                
             }
             Console.WriteLine();
             return userInputs;
+
+            checkIfFullDictionary(ref userInputs);
+        }
+
+        private static void checkIfFullDictionary(ref Dictionary<string, string> i_UserInputs)
+        {
+
         }
 
         public static string GetEnumOptions(Type enumType)
@@ -190,6 +213,7 @@ namespace Ex03.ConsoleUI
         private static Type chooseVehicleType()
         {
             string inputStr;
+            bool isValidInput = false;
             Type vehicleType = null;
 
             Console.WriteLine(

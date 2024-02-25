@@ -1,4 +1,6 @@
-﻿namespace Ex03.GarageLogic
+﻿using System;
+
+namespace Ex03.GarageLogic
 {
     public class Truck : GasVehicle
     {
@@ -13,9 +15,9 @@
 
         public bool TransportHazardousMaterial
         {
-            set 
-            { 
-                m_TransportHazardousMaterial = value; 
+            set
+            {
+                m_TransportHazardousMaterial = value;
             }
         }
 

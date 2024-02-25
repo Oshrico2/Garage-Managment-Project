@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.GarageLogic
 {
@@ -91,7 +92,7 @@ namespace Ex03.GarageLogic
                         MethodInfo setMethod = propertyInfo.GetSetMethod();
                         if (setMethod != null)
                         {
-                            object valueToSet;
+                            object valueToSet = item.Value;
 
                             if (propertyInfo.PropertyType.IsEnum)
                             {
@@ -101,7 +102,8 @@ namespace Ex03.GarageLogic
                             {
                                 valueToSet = Convert.ChangeType(item.Value, propertyInfo.PropertyType);
                             }
-                            setMethod.Invoke(vehicle, new object[] { valueToSet });
+
+                            propertyInfo.SetValue(vehicle, valueToSet);
                         }
                     }
                 }
