@@ -103,7 +103,14 @@ namespace Ex03.GarageLogic
                                 valueToSet = Convert.ChangeType(item.Value, propertyInfo.PropertyType);
                             }
 
-                            propertyInfo.SetValue(vehicle, valueToSet);
+                            try 
+                            { 
+                                propertyInfo.SetValue(vehicle, valueToSet);
+                            }
+                            catch(Exception ex)
+                            {
+                                throw ex;
+                            }
                         }
                     }
                 }

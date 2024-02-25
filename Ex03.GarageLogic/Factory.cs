@@ -37,7 +37,7 @@ namespace Ex03.GarageLogic
             {
                 obj = new Car(i_LicenseNumber);
             }
-            else if (type == supportedVehicleTypes[1])
+            else if (type == supportedVehicleTypes[4])
             {
                 obj = new Motorcycle(i_LicenseNumber);
             }

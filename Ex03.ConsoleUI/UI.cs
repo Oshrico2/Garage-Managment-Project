@@ -2,6 +2,7 @@
 using Ex03.GarageLogic;
 using System.Collections.Generic;
 using Ex03.GarageLogic.Exceptions;
+using System.Linq;
 namespace Ex03.ConsoleUI
 {
     public abstract class UI
@@ -168,7 +169,7 @@ namespace Ex03.ConsoleUI
 
         private static void displayFullDataHandler()
         {
-
+            
         }
 
         private static Dictionary<string, string> displayAndSetAttributes(Dictionary<string, Type> setters, string i_LicenseNumber)
@@ -177,10 +178,10 @@ namespace Ex03.ConsoleUI
             Dictionary<string, string> userInputs = new Dictionary<string, string>();
 
             foreach (var pair in setters)
-            { 
+            {
                 if (pair.Value.IsEnum)
                 {
-                    string enumOptions = GetEnumOptions(pair.Value);
+                    string enumOptions = getEnumOptions(pair.Value);
                     Console.WriteLine(string.Format("Enter Please {0}\nOptions: {1}", pair.Key, enumOptions));
                 }
                 else
@@ -189,25 +190,19 @@ namespace Ex03.ConsoleUI
                 }
                 input = Console.ReadLine();
                 userInputs[pair.Key] = input;
-                
+
             }
             Console.WriteLine();
+
             return userInputs;
-
-            checkIfFullDictionary(ref userInputs);
         }
 
-        private static void checkIfFullDictionary(ref Dictionary<string, string> i_UserInputs)
+        private static string getEnumOptions(Type i_EnumType)
         {
-
-        }
-
-        public static string GetEnumOptions(Type enumType)
-        {
-            if (!enumType.IsEnum)
+            if (!i_EnumType.IsEnum)
                 throw new ArgumentException("The specified type is not an enum.");
 
-            return string.Join(", ", Enum.GetNames(enumType));
+            return string.Join(", ", Enum.GetNames(i_EnumType));
         }
 
         private static Type chooseVehicleType()
