@@ -37,7 +37,8 @@ namespace Ex03.GarageLogic
             }
             else if (i_FuelType != m_FuelType)
             {
-                throw new ArgumentException("Cannot refueling. Not the Same fuel type");
+                throw new ArgumentException(String.Format("Cannot refueling. Not the same fuel type. Try to use: {0}", this.FuelType.ToString()));
+
             }
             else
             {

@@ -172,16 +172,23 @@ namespace Ex03.GarageLogic
 
         }
 
-        public static void RefuelingOrCharging(string i_LicenseNumber, float i_Amount, eFuelType? i_FuelType = null)
+        public static void RefuelingOrCharging(string i_LicenseNumber, string i_Amount, eFuelType? i_FuelType = null)
         {
             Vehicle vehicleFound = findVehicleByLicenseNumber(i_LicenseNumber);
+
+            if (!float.TryParse(i_Amount, out float amount))
+            {
+                throw new FormatException("Invalid quantity to fill format. Please provide a number.");
+            }
+
+
             if (vehicleFound != null)
             {
                 if (vehicleFound is GasVehicle gasVehicle)
                 {
                     if (i_FuelType.HasValue)
                     {
-                        gasVehicle.Refueling(i_Amount, i_FuelType.Value);
+                        gasVehicle.Refueling(amount, i_FuelType.Value);
                     }
                     else
                     {
@@ -192,7 +199,7 @@ namespace Ex03.GarageLogic
                 {
                     if (i_FuelType == null)
                     {
-                        electricVehicle.Charging(i_Amount);
+                        electricVehicle.Charging(amount);
                     }
                     else
                     {
@@ -219,6 +226,17 @@ namespace Ex03.GarageLogic
                 throw new ArgumentException("Vehicle does not exist in the garage");
             }
         }
+
+        public static eFuelType ConvertToEFuelType(string i_InputToConvert)
+        {
+            if (!Enum.TryParse(i_InputToConvert, true, out eFuelType parsedFuelType))
+            {
+                throw new FormatException("Invalid fuel type. Please provide a valid Fuel Type value.");
+            }
+            return parsedFuelType;
+        }
+
+
     }
 
 }

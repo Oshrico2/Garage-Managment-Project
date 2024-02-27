@@ -37,13 +37,13 @@ namespace Ex03.ConsoleUI
             int input;
             Console.WriteLine(
                 @"Select the number of the action you want to do:
-            1 - Insert car to garage.
-            2 - Display the license numbers of the vehicles in the garage.
-            3 - Change the status of a car in the garage.
-            4 - To inflate the air of car wheels to the maximum.
-            5 - Refuel a fuel-driven vehicle.
-            6 - Charge an electric vehicle.
-            7 - Display complete data by vehicle license number");
+1 - Insert car to garage.
+2 - Display the license numbers of the vehicles in the garage.
+3 - Change the status of a car in the garage.
+4 - To inflate the air of car wheels to the maximum.
+5 - Refuel a fuel-driven vehicle.
+6 - Charge an electric vehicle.
+7 - Display complete data by vehicle license number");
 
             inputStr = Console.ReadLine();
             int.TryParse(inputStr, out input);
@@ -82,7 +82,7 @@ namespace Ex03.ConsoleUI
                     chargeVehicleHandler();
                     break;
                 case 7:
-                    displayFullDataHandler();
+                    displayFullDetailsHandler();
                     break;
             }
         }
@@ -154,22 +154,125 @@ namespace Ex03.ConsoleUI
 
         private static void blowAirHandler()
         {
+            string input;
+            bool isValidInput = false;
+
+            Console.WriteLine("Enter the license number of the vehicle for which you want to inflate wheels");
+
+            while (!isValidInput)
+            {
+                try
+                {
+                    input = Console.ReadLine();
+                    Garage.BlowMaxAirPressure(input);
+                    isValidInput = true;
+                    Console.WriteLine("The inflation of the wheels has been completed successfully");
+                }
+                catch (ArgumentException ae)
+                {
+                    Console.WriteLine(ae.Message);
+                }
+                catch (ValueOutOfRangeException vore)
+                {
+                    Console.WriteLine(vore.Message);
+                }
+            }
+            
 
         }
-
         private static void refuelVehicleHandler()
         {
+            string inputLicenseNumber, inputFuelType, inputAmount;
+            bool isValidInput = false;
+
+            Console.WriteLine(String.Format("Please enter license number, type of fuel to fill, quantity to fill\nOptions for fuel types:\n{0}", getEnumOptions(typeof(eFuelType))));
+
+            while (!isValidInput)
+            {
+                try
+                {
+                    Console.Write("License Number:");
+                    inputLicenseNumber = Console.ReadLine();
+                    Console.Write("Fuel Type:");
+                    inputFuelType = Console.ReadLine();
+                    Console.Write("Quantity:");
+                    inputAmount = Console.ReadLine();
+                    Garage.RefuelingOrCharging(inputLicenseNumber, inputAmount, Garage.ConvertToEFuelType(inputFuelType));
+                    isValidInput = true;
+                    Console.WriteLine("The refueling has been completed successfully");
+                }
+                catch (ArgumentException ae)
+                {
+                    Console.WriteLine(ae.Message);
+                }
+                catch (FormatException fe)
+                {
+                    Console.WriteLine(fe.Message);
+                }
+                catch (ValueOutOfRangeException vore)
+                {
+                    Console.WriteLine(vore.Message);
+                }
+            }
 
         }
 
         private static void chargeVehicleHandler()
         {
+            string inputLicenseNumber, inputAmount;
+            bool isValidInput = false;
 
+            Console.WriteLine("Please enter license number and quantity to charge");
+            while (!isValidInput)
+            {
+                try
+                {
+                    Console.Write("License Number:");
+                    inputLicenseNumber = Console.ReadLine();
+                    Console.Write("Quantity:");
+                    inputAmount = Console.ReadLine();
+                    Garage.RefuelingOrCharging(inputLicenseNumber, inputAmount);
+                    isValidInput = true;
+                    Console.WriteLine("The charge has been completed successfully");
+                }
+                catch (ArgumentException ae)
+                {
+                    Console.WriteLine(ae.Message);
+                }
+                catch (FormatException fe)
+                {
+                    Console.WriteLine(fe.Message);
+                }
+                catch (ValueOutOfRangeException vore)
+                {
+                    Console.WriteLine(vore.Message);
+                }
+            }
         }
 
-        private static void displayFullDataHandler()
+        private static void displayFullDetailsHandler()
         {
-            
+            string input, vehicleDetails;
+            bool isValidInput = false;
+
+            Console.WriteLine("Please enter license number and quantity to show details");
+
+            while (!isValidInput)
+            {
+                try
+                {
+                    Console.Write("License Number: ");
+                    input = Console.ReadLine();
+                    vehicleDetails = Garage.ShowDataOnVehicle(input);
+                    isValidInput = true;
+                    Console.WriteLine(String.Format("Details for vehicle with License Number: {0}.\n{1}",input ,vehicleDetails));
+                }
+                catch(ArgumentException ae)
+                {
+                    Console.WriteLine(ae.Message);
+                }
+                
+            }
         }
 
         private static Dictionary<string, string> displayAndSetAttributes(Dictionary<string, Type> setters, string i_LicenseNumber)
