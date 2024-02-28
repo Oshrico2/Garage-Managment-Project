@@ -236,6 +236,16 @@ namespace Ex03.GarageLogic
             return parsedFuelType;
         }
 
+        public static eVehicleStatus ConvertToEVehicleStatus(string i_InputToConvert)
+        {
+            if (!Enum.TryParse(i_InputToConvert, true, out eVehicleStatus parseVehicleStatus))
+            {
+                throw new FormatException("Invalid vehicle status. Please provide a status for the vehicle.");
+            }
+            return parseVehicleStatus;
+        }
+
+
 
     }
 

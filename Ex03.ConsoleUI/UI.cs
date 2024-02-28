@@ -144,12 +144,88 @@ namespace Ex03.ConsoleUI
 
         private static void displayVehiclesInGarageHandler()
         {
+            string input;
+            eVehicleStatus status;
+            List<string> listOfVehiclesInGarage = new List<string>();
+            bool isValidInput = false;
 
+            Console.WriteLine("Please write yes you want to show all the list or no if you want to filter\n");
+            input = Console.ReadLine();
+            if (input == "yes")
+            {
+                listOfVehiclesInGarage = Garage.GetListOfVehiclesInGarage();
+                foreach (var vehicle in listOfVehiclesInGarage)
+                {
+                    Console.WriteLine(vehicle);
+                }
+            }
+            else
+            {
+                while (!isValidInput)
+                {
+                    try
+                    {
+                        Console.WriteLine(String.Format("please choose which list you want to show. Options for status:\n{0}", getEnumOptions(typeof(eVehicleStatus))));
+                        input = Console.ReadLine();
+                        status = Garage.ConvertToEVehicleStatus(input);
+                        listOfVehiclesInGarage = Garage.GetListOfVehiclesInGarage(status);
+                        foreach (var vehicle in listOfVehiclesInGarage)
+                        {
+                            Console.WriteLine(vehicle);
+                        }
+                        isValidInput = true;
+                    }
+
+                    catch (ValueOutOfRangeException vore)
+                    {
+                        Console.WriteLine(vore.Message);
+                    }
+
+                    catch (FormatException fe)
+                    {
+                        Console.WriteLine($"An error occurred: {fe.Message}");
+                    }
+
+                    catch (ArgumentException ae)
+                    {
+                        Console.WriteLine($"An error occurred: {ae.Message}");
+                    }
+                }
+            }
         }
 
         private static void changeStatusHandler()
         {
+            string inputLicenseNumber, inputVehicleStatus;
+            bool isValidInput = false;
 
+            Console.WriteLine(String.Format("Please enter license number and the status you want to change.\nOptions for status:\n{0}", getEnumOptions(typeof(eVehicleStatus))));
+
+            while (!isValidInput)
+            {
+                try
+                {
+                    Console.Write("License Number:");
+                    inputLicenseNumber = Console.ReadLine();
+                    Console.Write("Status:");
+                    inputVehicleStatus = Console.ReadLine();
+                    Garage.ChangeVehicleStatus(inputLicenseNumber, Garage.ConvertToEVehicleStatus(inputVehicleStatus));
+                    isValidInput = true;
+                    Console.WriteLine("The vehicle ststus has been changed successfully");
+                }
+                catch (ArgumentException ae)
+                {
+                    Console.WriteLine(ae.Message);
+                }
+                catch (FormatException fe)
+                {
+                    Console.WriteLine(fe.Message);
+                }
+                catch (ValueOutOfRangeException vore)
+                {
+                    Console.WriteLine(vore.Message);
+                }
+            }
         }
 
         private static void blowAirHandler()
