@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.GarageLogic
@@ -57,8 +58,11 @@ namespace Ex03.GarageLogic
                 
                 if (vehicleProperty.CanWrite)
                 {
+                    //Type propertyType = vehicleProperty.PropertyType;
+                    //setters[vehicleProperty.Name] = propertyType;
                     Type propertyType = vehicleProperty.PropertyType;
-                    setters[vehicleProperty.Name] = propertyType;
+                    string propertyNameWithSpaces = Regex.Replace(vehicleProperty.Name, "([A-Z])", " $1").TrimStart();
+                    setters[propertyNameWithSpaces] = propertyType;
                 }
             }
 

@@ -5,10 +5,11 @@ namespace Ex03.ConsoleUI
     {
         public static void Main()
         {
-            while (true)
+            while (UI.RunProgram() == true)
             {
                 UI.RunProgram();
             }
+            Console.ReadLine();
         }
     }
 }
