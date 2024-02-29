@@ -1,37 +1,52 @@
 ﻿using System;
 using Ex03.GarageLogic;
 using System.Collections.Generic;
-using Ex03.GarageLogic.Exceptions;
+using System.Reflection;
 using System.Linq;
+using System.Text.RegularExpressions;
+using Ex03.GarageLogic.Exceptions;
+
 namespace Ex03.ConsoleUI
 {
     public abstract class UI
     {
-        public static void RunProgram()
+        public static bool RunProgram()
         {
-            bool isValidInput = false;
+            bool isValidInput = false, quitFlag = true; ; 
 
             Console.WriteLine("Welcome to Garage Management");
             while (!isValidInput)
             {
                 try
                 {
-                    menu();
-                    isValidInput = true;
+                    menu(ref isValidInput);
+                    if(isValidInput == true)
+                    {
+                        quitFlag= false;
+                    }
+                    else
+                    {
+                        isValidInput = true;
+                        quitFlag = true;
+                    }
                 }
                 catch (ValueOutOfRangeException vore)
                 {
                     Console.WriteLine(vore.Message);
+                    quitFlag= true;
                 }
                 catch(FormatException fe)
                 {
                     Console.WriteLine($"Error: {fe.Message}");
+                    quitFlag = true;
+
                 }
             }
+            return quitFlag;
         }
-            
 
-        private static void menu()
+
+        private static void menu(ref bool isValidInput)
         {
             string inputStr;
             int input;
@@ -43,20 +58,31 @@ namespace Ex03.ConsoleUI
 4 - To inflate the air of car wheels to the maximum.
 5 - Refuel a fuel-driven vehicle.
 6 - Charge an electric vehicle.
-7 - Display complete data by vehicle license number");
+7 - Display complete data by vehicle license number.
+q - Quit");
 
             inputStr = Console.ReadLine();
-            int.TryParse(inputStr, out input);
-
-            if(input >= 1 && input <= 7)
+            if (inputStr == "q")
             {
-                chooseUserOption(input);
+                //Environment.Exit(0);
+                isValidInput = true;
+                Console.Clear();
+                Console.WriteLine("Goodbye");
+                //Console.ReadLine();
             }
             else
             {
-                throw new ValueOutOfRangeException(1, 7,"");
-            }
+                int.TryParse(inputStr, out input);
 
+                if (input >= 1 && input <= 7)
+                {
+                    chooseUserOption(input);
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException(1, 7);
+                }
+            }
         }
 
         private static void chooseUserOption(int i_Input)
@@ -287,14 +313,20 @@ namespace Ex03.ConsoleUI
                 catch (ArgumentException ae)
                 {
                     Console.WriteLine(ae.Message);
+                    //Console.WriteLine("press b to return menu");
+                    menu(ref isValidInput);
                 }
                 catch (FormatException fe)
                 {
                     Console.WriteLine(fe.Message);
+                    //Console.WriteLine("press b to return menu");
+                    menu(ref isValidInput);
                 }
                 catch (ValueOutOfRangeException vore)
                 {
                     Console.WriteLine(vore.Message);
+                    //Console.WriteLine("press b to return menu");
+                    menu(ref isValidInput);
                 }
             }
 
@@ -321,14 +353,17 @@ namespace Ex03.ConsoleUI
                 catch (ArgumentException ae)
                 {
                     Console.WriteLine(ae.Message);
+                    menu(ref isValidInput);
                 }
                 catch (FormatException fe)
                 {
                     Console.WriteLine(fe.Message);
+                    menu(ref isValidInput);
                 }
                 catch (ValueOutOfRangeException vore)
                 {
                     Console.WriteLine(vore.Message);
+                    menu(ref isValidInput);
                 }
             }
         }
@@ -391,23 +426,54 @@ namespace Ex03.ConsoleUI
             return string.Join(", ", Enum.GetNames(i_EnumType));
         }
 
+        //private static Type chooseVehicleType()
+        //{
+        //    string inputStr;
+        //    bool isValidInput = false;
+        //    Type vehicleType = null;
+
+        //    Console.WriteLine(
+        //        @"Select the type of vehicle you want:
+        //    Car.
+        //    Motorcycle.
+        //    ElectricCar.
+        //    ElectricMotorcycle.
+        //    Truck.");
+        //    inputStr = Console.ReadLine();
+        //    vehicleType = Type.GetType("Ex03.GarageLogic." + inputStr + ", Ex03.GarageLogic");
+
+        //    return vehicleType;
+        //}
+
         private static Type chooseVehicleType()
         {
-            string inputStr;
+            Type[] vehicleTypes = Assembly.GetAssembly(typeof(Vehicle)).GetTypes().Where(t => t.IsSubclassOf(typeof(Vehicle)) && !t.IsAbstract)
+                .ToArray();
+
+            Console.WriteLine("Select the type of vehicle you want:");
+            for (int i = 0; i < vehicleTypes.Length; i++)
+            {
+                string typeNameWithSpaces = Regex.Replace(vehicleTypes[i].Name, "([A-Z])", " $1").TrimStart();
+                Console.WriteLine($"{i + 1}. {typeNameWithSpaces}");
+            }
+
+
+            int choice = 0;
             bool isValidInput = false;
-            Type vehicleType = null;
+            while (!isValidInput)
+            {
+                if (int.TryParse(Console.ReadLine(), out choice) && choice > 0 && choice <= vehicleTypes.Length)
+                {
+                    isValidInput = true;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a number corresponding to the vehicle type.");
+                }
+            }
 
-            Console.WriteLine(
-                @"Select the type of vehicle you want:
-            Car.
-            Motorcycle.
-            ElectricCar.
-            ElectricMotorcycle.
-            Truck.");
-            inputStr = Console.ReadLine();
-            vehicleType = Type.GetType("Ex03.GarageLogic." + inputStr + ", Ex03.GarageLogic");
-
-            return vehicleType;
+            return vehicleTypes[choice - 1];
         }
+
     }
 }
