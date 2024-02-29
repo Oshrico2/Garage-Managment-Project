@@ -37,7 +37,7 @@ namespace Ex03.GarageLogic
         {
             if(this.m_AirPressure + i_AirAmount > this.m_MaxAirPressure)
             {
-                throw new ValueOutOfRangeException(0,m_MaxAirPressure - m_AirPressure);
+                throw new ValueOutOfRangeException(0,m_MaxAirPressure - m_AirPressure, "For Blow Wheels");
             }
             else
             {

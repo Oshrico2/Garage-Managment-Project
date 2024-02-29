@@ -8,10 +8,7 @@ namespace Ex03.GarageLogic
         private float m_CargoCapacity;
 
 
-        public Truck(string i_LicenseNumber) : base(i_LicenseNumber, 12, 28,eFuelType.Soler, 110f)
-        {
-
-        }
+        public Truck(string i_LicenseNumber) : base(i_LicenseNumber, 12, 28,eFuelType.Soler, 110f) { }
 
         public bool TransportHazardousMaterial
         {

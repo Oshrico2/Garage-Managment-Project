@@ -82,7 +82,6 @@ q - Quit");
                 {
                     throw new ValueOutOfRangeException(1, 7);
                 }
-
             }
         }
 
@@ -163,6 +162,13 @@ q - Quit");
                     catch (ArgumentException ae)
                     {
                         Console.WriteLine($"An error occurred: {ae.Message}");
+                    }
+                    catch(Exception ex)
+                    {
+                        if (ex.InnerException != null)
+                        {
+                            Console.WriteLine(ex.InnerException.Message);
+                        }
                     }
                 }
                 

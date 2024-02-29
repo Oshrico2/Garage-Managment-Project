@@ -5,6 +5,11 @@ namespace Ex03.ConsoleUI
     {
         public static void Main()
         {
+            startProject();
+        }
+
+        private static void startProject()
+        {
             while (UI.RunProgram() == true)
             {
                 UI.RunProgram();
