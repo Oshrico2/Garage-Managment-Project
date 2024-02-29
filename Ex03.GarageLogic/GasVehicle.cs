@@ -24,6 +24,7 @@ namespace Ex03.GarageLogic
         {
             set
             {
+                this.SetEnergyPrecentage(value / m_MaxFuelAmount * 100);
                 this.Refueling(value,this.m_FuelType);
             }
         }
@@ -49,7 +50,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             string str;
-            str = string.Format("Fuel Type:{0}\nFuel Amount{1}\nMax Fuel Amount:{2}\n", m_FuelType, m_FuelAmount, m_MaxFuelAmount);
+            str = string.Format("Fuel Type: {0}\nFuel Amount: {1}\nMax Fuel Amount: {2}\n", m_FuelType, m_FuelAmount, m_MaxFuelAmount);
                                  
             return base.ToString() + str;
         }

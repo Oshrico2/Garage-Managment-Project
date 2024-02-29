@@ -19,7 +19,7 @@
         public override string ToString()
         {
             string str;
-            str = string.Format("License Type:{0}\nEngine Capaciy:{1}\n", m_LicenseType, m_EngineCapaciy);
+            str = string.Format("License Type: {0}\nEngine Capaciy: {1}\n", m_LicenseType, m_EngineCapaciy);
 
             return base.ToString() + str;
         }

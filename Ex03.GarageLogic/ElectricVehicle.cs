@@ -16,6 +16,7 @@ namespace Ex03.GarageLogic
         {
             set
             {
+                this.SetEnergyPrecentage(value / m_MaxAccumulatorTime * 100);
                 this.Charging(value);
             }
         }
@@ -35,7 +36,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             string str;
-            str = string.Format("Accumulator Time Left:{0}\nMax Accumulator Time:{1}\n", m_AccumulatorTimeLeft, m_MaxAccumulatorTime);
+            str = string.Format("Accumulator Time Left: {0}\nMax Accumulator Time: {1}\n", m_AccumulatorTimeLeft, m_MaxAccumulatorTime);
 
             return base.ToString() + str;
         }

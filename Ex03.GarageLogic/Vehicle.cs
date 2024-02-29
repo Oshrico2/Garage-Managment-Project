@@ -6,7 +6,7 @@ namespace Ex03.GarageLogic
     {
         private string m_VehicleModel;
         private readonly string m_LicenseNumber;
-        private float m_EnergeyPrecentage;
+        private float m_EnergyPrecentage;
         private List<Wheel> m_WheelList;
         private string m_OwnerName;
         private string m_OwnerPhone;
@@ -61,12 +61,17 @@ namespace Ex03.GarageLogic
             }
         }
 
+        protected void SetEnergyPrecentage(float i_EnergyPrecentage)
+        {
+            m_EnergyPrecentage = i_EnergyPrecentage;
+        }
+
         public override string ToString()
         {
-            return string.Format("Model: {0}\nLicense Number: {1}\nEnergy Percentage: {2}\nNumber of Wheels: {3}, {4}/{5} air pressure to each\nOwner name: {6}\nOwner Phone: {7}\nStatus in Garage: {8}\n",
+            return string.Format("Model: {0}\nLicense Number: {1}\nEnergy Percentage: {2}%\nNumber of Wheels: {3}, {4}/{5} air pressure to each\nOwner name: {6}\nOwner Phone: {7}\nStatus in Garage: {8}\n",
                                  m_VehicleModel,
                                  m_LicenseNumber,
-                                 m_EnergeyPrecentage,
+                                 m_EnergyPrecentage.ToString("0.00"),
                                  m_WheelList.Count,
                                  m_WheelList.Count > 0 ? m_WheelList[0].AirPressure.ToString() : "N/A",
                                  m_WheelList.Count > 0 ? m_WheelList[0].MaxAirPressure.ToString() : "N/A",

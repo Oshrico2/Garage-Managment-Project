@@ -29,7 +29,7 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             string str;
-            str = string.Format("Is Transport Hazardous Material:{0}\nCargo Capacity:{1}\n", m_TransportHazardousMaterial, m_CargoCapacity);
+            str = string.Format("Is Transport Hazardous Material: {0}\nCargo Capacity: {1}\n", m_TransportHazardousMaterial, m_CargoCapacity);
 
             return base.ToString() + str;
         }

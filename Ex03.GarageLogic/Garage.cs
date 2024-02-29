@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using Ex03.GarageLogic.Exceptions;
 
@@ -74,8 +76,7 @@ namespace Ex03.GarageLogic
                     //Type propertyType = vehicleProperty.PropertyType;
                     //setters[vehicleProperty.Name] = propertyType;
                     Type propertyType = vehicleProperty.PropertyType;
-                    string propertyNameWithSpaces = Regex.Replace(vehicleProperty.Name, "([A-Z])", " $1").TrimStart();
-                    setters[propertyNameWithSpaces] = propertyType;
+                    setters[vehicleProperty.Name] = propertyType;
                 }
             }
 
@@ -123,7 +124,7 @@ namespace Ex03.GarageLogic
                                 }
                                 catch(FormatException fe)
                                 { 
-                                    throw new FormatException(string.Format("Invalid boolean value. Please use {0} for {1}",propertyInfo.PropertyType.Name,propertyInfo.Name), fe);
+                                    throw new FormatException(string.Format("Invalid value. Please use {0} for {1}",propertyInfo.PropertyType.Name,propertyInfo.Name), fe);
                                 }
                             }
 
@@ -240,7 +241,14 @@ namespace Ex03.GarageLogic
             return parseVehicleStatus;
         }
 
+        public static string DisplayTypesOfVehicles()
+        {
+            Type[] vehicleTypes = Assembly.GetAssembly(typeof(Vehicle)).GetTypes()
+            .Where(t => t.IsSubclassOf(typeof(Vehicle)) && !t.IsAbstract)
+            .ToArray();
 
+            return string.Join("", vehicleTypes.Select(t =>'\n' + t.Name));
+        }
 
     }
 

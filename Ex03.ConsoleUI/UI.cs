@@ -3,7 +3,6 @@ using Ex03.GarageLogic;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.ConsoleUI
@@ -80,7 +79,7 @@ q - Quit");
                 }
                 else
                 {
-                    throw new ValueOutOfRangeException(1, 7);
+                    throw new ValueOutOfRangeException(1, 7, "");
                 }
             }
         }
@@ -306,6 +305,8 @@ q - Quit");
                     inputFuelType = Console.ReadLine();
                     Console.Write("Quantity:");
                     inputAmount = Console.ReadLine();
+                    
+
                     Garage.RefuelingOrCharging(inputLicenseNumber, inputAmount, Garage.ConvertToEFuelType(inputFuelType));
                     isValidInput = true;
                     Console.WriteLine("The refueling has been completed successfully");
@@ -313,20 +314,21 @@ q - Quit");
                 catch (ArgumentException ae)
                 {
                     Console.WriteLine(ae.Message);
-                    //Console.WriteLine("press b to return menu");
-                    menu(ref isValidInput);
+                    Console.WriteLine("Press b to back main menu");
+                    
+                    if (isGoingBack(Console.ReadLine()))
+                    {
+                        break;
+                    }
+
                 }
                 catch (FormatException fe)
                 {
                     Console.WriteLine(fe.Message);
-                    //Console.WriteLine("press b to return menu");
-                    menu(ref isValidInput);
                 }
                 catch (ValueOutOfRangeException vore)
                 {
                     Console.WriteLine(vore.Message);
-                    //Console.WriteLine("press b to return menu");
-                    menu(ref isValidInput);
                 }
             }
 
@@ -353,17 +355,19 @@ q - Quit");
                 catch (ArgumentException ae)
                 {
                     Console.WriteLine(ae.Message);
-                    menu(ref isValidInput);
+                    Console.WriteLine("Press b to back main menu");
+
+                    if (isGoingBack(Console.ReadLine()))
+                    {
+                    }
                 }
                 catch (FormatException fe)
                 {
                     Console.WriteLine(fe.Message);
-                    menu(ref isValidInput);
                 }
                 catch (ValueOutOfRangeException vore)
                 {
                     Console.WriteLine(vore.Message);
-                    menu(ref isValidInput);
                 }
             }
         }
@@ -403,11 +407,11 @@ q - Quit");
                 if (pair.Value.IsEnum)
                 {
                     string enumOptions = getEnumOptions(pair.Value);
-                    Console.WriteLine(string.Format("Enter Please {0}\nOptions: {1}", pair.Key, enumOptions));
+                    Console.WriteLine(string.Format("Enter Please {0}\nOptions: {1}", handleCapitalLetters(pair.Key), enumOptions));
                 }
                 else
                 {
-                    Console.WriteLine(string.Format("Enter Please {0}", pair.Key));
+                    Console.WriteLine(string.Format("Enter Please {0}", handleCapitalLetters(pair.Key)));
                 }
                 input = Console.ReadLine();
                 userInputs[pair.Key] = input;
@@ -447,33 +451,46 @@ q - Quit");
 
         private static Type chooseVehicleType()
         {
-            Type[] vehicleTypes = Assembly.GetAssembly(typeof(Vehicle)).GetTypes().Where(t => t.IsSubclassOf(typeof(Vehicle)) && !t.IsAbstract)
-                .ToArray();
+            string inputStr;
+            Type vehicleType = null;
 
-            Console.WriteLine("Select the type of vehicle you want:");
-            for (int i = 0; i < vehicleTypes.Length; i++)
-            {
-                string typeNameWithSpaces = Regex.Replace(vehicleTypes[i].Name, "([A-Z])", " $1").TrimStart();
-                Console.WriteLine($"{i + 1}. {typeNameWithSpaces}");
+            Console.WriteLine("Select the type of vehicle you want without spaces:" + handleCapitalLetters(Garage.DisplayTypesOfVehicles()));
+            inputStr = Console.ReadLine();
+            vehicleType = Type.GetType("Ex03.GarageLogic." + inputStr + ", Ex03.GarageLogic");
+
+            return vehicleType;
+        }
+
+        private static string handleCapitalLetters(string i_String)
+        {
+            var result = new System.Text.StringBuilder();
+            result.Append(i_String[0]);
+
+            for (int i = 1; i < i_String.Length; i++)
+            { 
+                if (char.IsUpper(i_String[i]))
+                {
+                    result.Append(' ');
+                }
+                result.Append(i_String[i]);
             }
 
+            return result.ToString();
+        }
 
-            int choice = 0;
-            bool isValidInput = false;
-            while (!isValidInput)
+        private static bool isGoingBack(string i_Str)
+        {
+            bool isGoingBack = false;
+
+            if(i_Str == "b")
             {
-                if (int.TryParse(Console.ReadLine(), out choice) && choice > 0 && choice <= vehicleTypes.Length)
-                {
-                    isValidInput = true;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input. Please enter a number corresponding to the vehicle type.");
-                }
+                isGoingBack = true;
             }
 
-            return vehicleTypes[choice - 1];
+            return isGoingBack;
         }
 
     }
+
+    
 }
