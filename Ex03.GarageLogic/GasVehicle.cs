@@ -33,7 +33,7 @@ namespace Ex03.GarageLogic
 
             if (this.m_FuelAmount + i_Liters > this.m_MaxFuelAmount)
             {
-                throw new ValueOutOfRangeException(0, m_MaxFuelAmount - m_FuelAmount);
+                throw new ValueOutOfRangeException(0, m_MaxFuelAmount - m_FuelAmount,"For Fuel Amount");
             }
             else if (i_FuelType != m_FuelType)
             {

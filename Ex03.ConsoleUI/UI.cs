@@ -54,7 +54,7 @@ namespace Ex03.ConsoleUI
             }
             else
             {
-                throw new ValueOutOfRangeException(1, 7);
+                throw new ValueOutOfRangeException(1, 7,"");
             }
 
         }
@@ -136,6 +136,13 @@ namespace Ex03.ConsoleUI
                     catch (ArgumentException ae)
                     {
                         Console.WriteLine($"An error occurred: {ae.Message}");
+                    }
+                    catch(Exception ex)
+                    {
+                        if (ex.InnerException != null)
+                        {
+                            Console.WriteLine(ex.InnerException.Message);
+                        }
                     }
                 }
                 

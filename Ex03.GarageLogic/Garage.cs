@@ -20,13 +20,26 @@ namespace Ex03.GarageLogic
         private static Vehicle findVehicleByLicenseNumber(string i_LicenseNumber)
         {
             Vehicle foundVehicle = s_VehiclesInGarage.Find(vehicle => vehicle.LicenseNumber == i_LicenseNumber);
-            return foundVehicle;
+            if(foundVehicle == null)
+            {
+                throw new ArgumentException(string.Format("Vehicle with License Number: {0} does not exist in the garage",i_LicenseNumber));
+            }
+            else
+            {
+                return foundVehicle;
+            }
         }
         public static bool IsExistsInGarage(string i_LicenseNumber)
         {
             bool isExistsInGarage = false;
-            Vehicle vehicle = findVehicleByLicenseNumber(i_LicenseNumber);
+            Vehicle vehicle = null;
 
+            try
+            {
+                vehicle = findVehicleByLicenseNumber(i_LicenseNumber);
+            }
+            catch(ArgumentException ae) { }
+            
             if (vehicle != null)
             {
                 vehicle.ChangeVehicleStatus(eVehicleStatus.Repair);
@@ -100,7 +113,14 @@ namespace Ex03.GarageLogic
                             }
                             else
                             {
-                                valueToSet = Convert.ChangeType(item.Value, propertyInfo.PropertyType);
+                                try
+                                {
+                                    valueToSet = Convert.ChangeType(item.Value, propertyInfo.PropertyType);
+                                }
+                                catch(FormatException fe)
+                                { 
+                                    throw new FormatException(string.Format("Invalid boolean value. Please use {0} for {1}",propertyInfo.PropertyType.Name,propertyInfo.Name), fe);
+                                }
                             }
 
                             try 
@@ -114,6 +134,7 @@ namespace Ex03.GarageLogic
                         }
                     }
                 }
+
                 foreach (Wheel wheel in vehicle.WheelList)
                 {
                     float airPressure = float.Parse(i_UserInputs["AirPressure"].ToString());
@@ -142,32 +163,17 @@ namespace Ex03.GarageLogic
         public static void ChangeVehicleStatus(string i_LicenseNumber, eVehicleStatus i_VehicleStatus)
         {
             Vehicle vehicleFound = findVehicleByLicenseNumber(i_LicenseNumber);
-            if (vehicleFound != null)
-            {
-                vehicleFound.ChangeVehicleStatus(i_VehicleStatus);
-            }
-            else
-            {
-                throw new ArgumentException("Vehicle does not exist in the garage");
-            }
+            vehicleFound.ChangeVehicleStatus(i_VehicleStatus);
         }
 
         public static void BlowMaxAirPressure(string i_LicenseNumber)
         {
             Vehicle vehicleFound = findVehicleByLicenseNumber(i_LicenseNumber);
             float airPressureToBlow;
-
-            if (vehicleFound != null)
+            airPressureToBlow = vehicleFound.WheelList[0].MaxAirPressure - vehicleFound.WheelList[0].AirPressure;
+            foreach (Wheel wheel in vehicleFound.WheelList)
             {
-                airPressureToBlow = vehicleFound.WheelList[0].MaxAirPressure - vehicleFound.WheelList[0].AirPressure;
-                foreach (Wheel wheel in vehicleFound.WheelList)
-                {
-                    wheel.BlowWheel(airPressureToBlow);
-                }
-            }
-            else
-            {
-                throw new ArgumentException("Vehicle does not exist in the garage");
+                wheel.BlowWheel(airPressureToBlow);
             }
 
         }
@@ -181,50 +187,35 @@ namespace Ex03.GarageLogic
                 throw new FormatException("Invalid quantity to fill format. Please provide a number.");
             }
 
-
-            if (vehicleFound != null)
+            if (vehicleFound is GasVehicle gasVehicle)
             {
-                if (vehicleFound is GasVehicle gasVehicle)
+                if (i_FuelType.HasValue)
                 {
-                    if (i_FuelType.HasValue)
-                    {
-                        gasVehicle.Refueling(amount, i_FuelType.Value);
-                    }
-                    else
-                    {
-                        throw new ArgumentException("Fuel type must be provided for gas vehicles");
-                    }
+                    gasVehicle.Refueling(amount, i_FuelType.Value);
                 }
-                else if (vehicleFound is ElectricVehicle electricVehicle)
+                else
                 {
-                    if (i_FuelType == null)
-                    {
-                        electricVehicle.Charging(amount);
-                    }
-                    else
-                    {
-                        throw new ArgumentException("Fuel type should not be provided for electric vehicles");
-                    }
+                    throw new ArgumentException("Fuel type must be provided for gas vehicles");
                 }
-
             }
-            else
+            else if (vehicleFound is ElectricVehicle electricVehicle)
             {
-                throw new ArgumentException("Vehicle does not exist in the garage");
+                if (i_FuelType == null)
+                {
+                    electricVehicle.Charging(amount);
+                }
+                else
+                {
+                    throw new ArgumentException("Fuel type should not be provided for electric vehicles");
+                }
             }
+
         }
 
         public static string ShowDataOnVehicle(string i_LicenseNumber)
         {
             Vehicle vehicleFound = findVehicleByLicenseNumber(i_LicenseNumber);
-            if(vehicleFound != null)
-            {
-                return vehicleFound.ToString();
-            }
-            else
-            {
-                throw new ArgumentException("Vehicle does not exist in the garage");
-            }
+            return vehicleFound.ToString();
         }
 
         public static eFuelType ConvertToEFuelType(string i_InputToConvert)

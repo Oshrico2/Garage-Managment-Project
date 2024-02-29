@@ -24,7 +24,7 @@ namespace Ex03.GarageLogic
         {
             if (this.m_AccumulatorTimeLeft + i_Hours > this.m_MaxAccumulatorTime)
             {
-                throw new ValueOutOfRangeException(0, m_MaxAccumulatorTime - m_AccumulatorTimeLeft);
+                throw new ValueOutOfRangeException(0, m_MaxAccumulatorTime - m_AccumulatorTimeLeft, "For Accumulator Time Left");
             }
             else
             {
