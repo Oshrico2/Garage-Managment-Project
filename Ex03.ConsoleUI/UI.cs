@@ -1,10 +1,8 @@
 ﻿using System;
 using Ex03.GarageLogic;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Linq;
 using Ex03.GarageLogic.Exceptions;
-
+using System.Text;
 namespace Ex03.ConsoleUI
 {
     public abstract class UI
@@ -38,17 +36,17 @@ namespace Ex03.ConsoleUI
                 {
                     Console.WriteLine($"Error: {fe.Message}");
                     quitFlag = true;
-
                 }
             }
+
             return quitFlag;
         }
 
-
-        private static void menu(ref bool isValidInput)
+        private static void menu(ref bool i_IsValidInput)
         {
             string inputStr;
             int input;
+
             Console.WriteLine(
                 @"Select the number of the action you want to do:
 1 - Insert car to garage.
@@ -59,20 +57,16 @@ namespace Ex03.ConsoleUI
 6 - Charge an electric vehicle.
 7 - Display complete data by vehicle license number.
 q - Quit");
-
             inputStr = Console.ReadLine();
             if (inputStr == "q")
             {
-                //Environment.Exit(0);
-                isValidInput = true;
+                i_IsValidInput = true;
                 Console.Clear();
                 Console.WriteLine("Goodbye");
-                //Console.ReadLine();
             }
             else
             {
                 int.TryParse(inputStr, out input);
-
                 if (input >= 1 && input <= 7)
                 {
                     chooseUserOption(input);
@@ -140,12 +134,11 @@ q - Quit");
                 }
 
                 isValidInput = false;
-
                 while (!isValidInput)
                 {
                     try
                     {
-                        userInputs = displayAndSetAttributes(setters, input);
+                        userInputs = displayAndSetAttributes(setters);
                         Garage.SetVehicleAttributes(userInputs, input);
                         isValidInput = true;
                         Console.WriteLine("The Vehicle arrived at the garage successfully ");
@@ -170,7 +163,6 @@ q - Quit");
                         }
                     }
                 }
-                
             }
         }
 
@@ -207,17 +199,14 @@ q - Quit");
                         }
                         isValidInput = true;
                     }
-
                     catch (ValueOutOfRangeException vore)
                     {
                         Console.WriteLine(vore.Message);
                     }
-
                     catch (FormatException fe)
                     {
                         Console.WriteLine($"An error occurred: {fe.Message}");
                     }
-
                     catch (ArgumentException ae)
                     {
                         Console.WriteLine($"An error occurred: {ae.Message}");
@@ -232,7 +221,6 @@ q - Quit");
             bool isValidInput = false;
 
             Console.WriteLine(String.Format("Please enter license number and the status you want to change.\nOptions for status:\n{0}", getEnumOptions(typeof(eVehicleStatus))));
-
             while (!isValidInput)
             {
                 try
@@ -266,7 +254,6 @@ q - Quit");
             bool isValidInput = false;
 
             Console.WriteLine("Enter the license number of the vehicle for which you want to inflate wheels");
-
             while (!isValidInput)
             {
                 try
@@ -285,16 +272,14 @@ q - Quit");
                     Console.WriteLine(vore.Message);
                 }
             }
-            
-
         }
+
         private static void refuelVehicleHandler()
         {
             string inputLicenseNumber, inputFuelType, inputAmount;
             bool isValidInput = false;
 
             Console.WriteLine(String.Format("Please enter license number, type of fuel to fill, quantity to fill\nOptions for fuel types:\n{0}", getEnumOptions(typeof(eFuelType))));
-
             while (!isValidInput)
             {
                 try
@@ -304,9 +289,7 @@ q - Quit");
                     Console.Write("Fuel Type:");
                     inputFuelType = Console.ReadLine();
                     Console.Write("Quantity:");
-                    inputAmount = Console.ReadLine();
-                    
-
+                    inputAmount = Console.ReadLine();       
                     Garage.RefuelingOrCharging(inputLicenseNumber, inputAmount, Garage.ConvertToEFuelType(inputFuelType));
                     isValidInput = true;
                     Console.WriteLine("The refueling has been completed successfully");
@@ -315,12 +298,10 @@ q - Quit");
                 {
                     Console.WriteLine(ae.Message);
                     Console.WriteLine("Press b to back main menu");
-                    
                     if (isGoingBack(Console.ReadLine()))
                     {
                         break;
                     }
-
                 }
                 catch (FormatException fe)
                 {
@@ -331,7 +312,6 @@ q - Quit");
                     Console.WriteLine(vore.Message);
                 }
             }
-
         }
 
         private static void chargeVehicleHandler()
@@ -356,9 +336,9 @@ q - Quit");
                 {
                     Console.WriteLine(ae.Message);
                     Console.WriteLine("Press b to back main menu");
-
                     if (isGoingBack(Console.ReadLine()))
                     {
+                        break;
                     }
                 }
                 catch (FormatException fe)
@@ -378,7 +358,6 @@ q - Quit");
             bool isValidInput = false;
 
             Console.WriteLine("Please enter license number and quantity to show details");
-
             while (!isValidInput)
             {
                 try
@@ -393,20 +372,20 @@ q - Quit");
                 {
                     Console.WriteLine(ae.Message);
                 }
-                
             }
         }
 
-        private static Dictionary<string, string> displayAndSetAttributes(Dictionary<string, Type> setters, string i_LicenseNumber)
+        private static Dictionary<string, string> displayAndSetAttributes(Dictionary<string, Type> i_Setters)
         {
             string input;
             Dictionary<string, string> userInputs = new Dictionary<string, string>();
 
-            foreach (var pair in setters)
+            foreach (var pair in i_Setters)
             {
                 if (pair.Value.IsEnum)
                 {
                     string enumOptions = getEnumOptions(pair.Value);
+
                     Console.WriteLine(string.Format("Enter Please {0}\nOptions: {1}", handleCapitalLetters(pair.Key), enumOptions));
                 }
                 else
@@ -415,8 +394,8 @@ q - Quit");
                 }
                 input = Console.ReadLine();
                 userInputs[pair.Key] = input;
-
             }
+
             Console.WriteLine();
 
             return userInputs;
@@ -429,25 +408,6 @@ q - Quit");
 
             return string.Join(", ", Enum.GetNames(i_EnumType));
         }
-
-        //private static Type chooseVehicleType()
-        //{
-        //    string inputStr;
-        //    bool isValidInput = false;
-        //    Type vehicleType = null;
-
-        //    Console.WriteLine(
-        //        @"Select the type of vehicle you want:
-        //    Car.
-        //    Motorcycle.
-        //    ElectricCar.
-        //    ElectricMotorcycle.
-        //    Truck.");
-        //    inputStr = Console.ReadLine();
-        //    vehicleType = Type.GetType("Ex03.GarageLogic." + inputStr + ", Ex03.GarageLogic");
-
-        //    return vehicleType;
-        //}
 
         private static Type chooseVehicleType()
         {
@@ -463,15 +423,16 @@ q - Quit");
 
         private static string handleCapitalLetters(string i_String)
         {
-            var result = new System.Text.StringBuilder();
-            result.Append(i_String[0]);
+            StringBuilder result = new StringBuilder();
 
+            result.Append(i_String[0]);
             for (int i = 1; i < i_String.Length; i++)
             { 
                 if (char.IsUpper(i_String[i]))
                 {
                     result.Append(' ');
                 }
+
                 result.Append(i_String[i]);
             }
 
@@ -489,8 +450,5 @@ q - Quit");
 
             return isGoingBack;
         }
-
     }
-
-    
 }

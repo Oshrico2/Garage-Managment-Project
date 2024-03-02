@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace Ex03.GarageLogic
 {
     public class ElectricMotorcycle : ElectricVehicle
@@ -20,8 +19,7 @@ namespace Ex03.GarageLogic
                 else
                 {
                     throw new ArgumentException("Wrong License Type");
-                }
-                     
+                }        
             }
         }
 
@@ -33,11 +31,10 @@ namespace Ex03.GarageLogic
         public override string ToString()
         {
             string str;
+
             str = string.Format("License Type: {0}\nEngine Capaciy: {1}\n", m_LicenseType, m_EngineCapaciy);
 
             return base.ToString() + str;
         }
-
-
     }
 }

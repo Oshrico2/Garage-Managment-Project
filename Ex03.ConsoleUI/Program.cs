@@ -14,6 +14,7 @@ namespace Ex03.ConsoleUI
             {
                 UI.RunProgram();
             }
+
             Console.ReadLine();
         }
     }
