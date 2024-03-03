@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using Ex03.GarageLogic.Exceptions;
-
 namespace Ex03.GarageLogic
 {
     public class Garage
@@ -23,6 +18,7 @@ namespace Ex03.GarageLogic
         private static Vehicle findVehicleByLicenseNumber(string i_LicenseNumber)
         {
             Vehicle foundVehicle = s_VehiclesInGarage.Find(vehicle => vehicle.LicenseNumber == i_LicenseNumber);
+
             if(foundVehicle == null)
             {
                 throw new ArgumentException(string.Format("Vehicle with License Number: {0} does not exist in the garage",i_LicenseNumber));
@@ -32,6 +28,7 @@ namespace Ex03.GarageLogic
                 return foundVehicle;
             }
         }
+
         public static bool IsExistsInGarage(string i_LicenseNumber)
         {
             bool isExistsInGarage = false;
@@ -41,7 +38,7 @@ namespace Ex03.GarageLogic
             {
                 vehicle = findVehicleByLicenseNumber(i_LicenseNumber);
             }
-            catch(ArgumentException ae) { }
+            catch(ArgumentException) { }
             
             if (vehicle != null)
             {
@@ -64,19 +61,17 @@ namespace Ex03.GarageLogic
             return setters;
         }
 
-        private static void chooseAttributes(Vehicle i_Vehicle ,ref Dictionary<string, Type> setters)
+        private static void chooseAttributes(Vehicle i_Vehicle ,ref Dictionary<string, Type> i_Setters)
         {
             Type vehicleType = i_Vehicle.GetType(), wheelType = typeof(Wheel);
 
             foreach (PropertyInfo vehicleProperty in vehicleType.GetProperties())
-            {
-                
+            {   
                 if (vehicleProperty.CanWrite)
                 {
-                    //Type propertyType = vehicleProperty.PropertyType;
-                    //setters[vehicleProperty.Name] = propertyType;
                     Type propertyType = vehicleProperty.PropertyType;
-                    setters[vehicleProperty.Name] = propertyType;
+
+                    i_Setters[vehicleProperty.Name] = propertyType;
                 }
             }
 
@@ -84,10 +79,9 @@ namespace Ex03.GarageLogic
             {
                 if (wheelProperty.CanWrite)
                 {
-                    setters[wheelProperty.Name] = wheelProperty.GetType();
+                    i_Setters[wheelProperty.Name] = wheelProperty.GetType();
                 }
             }
-
         }
 
         public static void SetVehicleAttributes(Dictionary<string,string> i_UserInputs, string i_LicenseNumber)
@@ -104,10 +98,12 @@ namespace Ex03.GarageLogic
                 foreach (var item in i_UserInputs)
                 {
                     PropertyInfo propertyInfo = vehicleType.GetProperty(item.Key);
+
                     if (propertyInfo != null && propertyInfo.CanWrite)
                     {
                         // Get the set method for the property
                         MethodInfo setMethod = propertyInfo.GetSetMethod();
+
                         if (setMethod != null)
                         {
                             object valueToSet = item.Value;
@@ -143,10 +139,10 @@ namespace Ex03.GarageLogic
                 foreach (Wheel wheel in vehicle.WheelList)
                 {
                     float airPressure = float.Parse(i_UserInputs["AirPressure"].ToString());
+
                     wheel.BlowWheel(airPressure);
                     wheel.WheelManufacturerName = i_UserInputs["WheelManufacturerName"];
                 }
-
             }
         }
 
@@ -168,6 +164,7 @@ namespace Ex03.GarageLogic
         public static void ChangeVehicleStatus(string i_LicenseNumber, eVehicleStatus i_VehicleStatus)
         {
             Vehicle vehicleFound = findVehicleByLicenseNumber(i_LicenseNumber);
+
             vehicleFound.ChangeVehicleStatus(i_VehicleStatus);
         }
 
@@ -175,12 +172,12 @@ namespace Ex03.GarageLogic
         {
             Vehicle vehicleFound = findVehicleByLicenseNumber(i_LicenseNumber);
             float airPressureToBlow;
+
             airPressureToBlow = vehicleFound.WheelList[0].MaxAirPressure - vehicleFound.WheelList[0].AirPressure;
             foreach (Wheel wheel in vehicleFound.WheelList)
             {
                 wheel.BlowWheel(airPressureToBlow);
             }
-
         }
 
         public static void RefuelingOrCharging(string i_LicenseNumber, string i_Amount, eFuelType? i_FuelType = null)
@@ -214,12 +211,12 @@ namespace Ex03.GarageLogic
                     throw new ArgumentException("Fuel type should not be provided for electric vehicles");
                 }
             }
-
         }
 
         public static string ShowDataOnVehicle(string i_LicenseNumber)
         {
             Vehicle vehicleFound = findVehicleByLicenseNumber(i_LicenseNumber);
+
             return vehicleFound.ToString();
         }
 
@@ -229,6 +226,7 @@ namespace Ex03.GarageLogic
             {
                 throw new FormatException("Invalid fuel type. Please provide a valid Fuel Type value.");
             }
+
             return parsedFuelType;
         }
 
@@ -238,6 +236,7 @@ namespace Ex03.GarageLogic
             {
                 throw new FormatException("Invalid vehicle status. Please provide a status for the vehicle.");
             }
+
             return parseVehicleStatus;
         }
 
@@ -249,7 +248,5 @@ namespace Ex03.GarageLogic
 
             return string.Join("", vehicleTypes.Select(t =>'\n' + t.Name));
         }
-
     }
-
 }

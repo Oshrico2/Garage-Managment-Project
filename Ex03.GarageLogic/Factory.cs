@@ -18,26 +18,27 @@ namespace Ex03.GarageLogic
             };
         }
 
-        public Vehicle CreateVehicle(Type type, string i_LicenseNumber)
+        public Vehicle CreateVehicle(Type i_Type, string i_LicenseNumber)
         {
             object obj;
-            if (type == supportedVehicleTypes[0])
+
+            if (i_Type == supportedVehicleTypes[0])
             {
                 obj = new ElectricCar(i_LicenseNumber);
             }
-            else if (type == supportedVehicleTypes[1])
+            else if (i_Type == supportedVehicleTypes[1])
             {
                 obj = new ElectricMotorcycle(i_LicenseNumber);
             }
-            else if (type == supportedVehicleTypes[2])
+            else if (i_Type == supportedVehicleTypes[2])
             {
                 obj = new Truck(i_LicenseNumber);
             }
-            else if (type == supportedVehicleTypes[3])
+            else if (i_Type == supportedVehicleTypes[3])
             {
                 obj = new Car(i_LicenseNumber);
             }
-            else if (type == supportedVehicleTypes[4])
+            else if (i_Type == supportedVehicleTypes[4])
             {
                 obj = new Motorcycle(i_LicenseNumber);
             }
@@ -45,6 +46,7 @@ namespace Ex03.GarageLogic
             {
                 throw new FormatException("Unsupported type!");
             }
+
             return obj as Vehicle;
         }
     }
